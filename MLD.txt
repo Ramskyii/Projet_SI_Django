@@ -1,0 +1,8 @@
+Rdv(Num_rdv , Heure_deb....... , NumP#, Num_Med# )
+Medecin (Num_med, NomM,PrenomM,TelephoneM ) 
+Patient(NumP , NomP,PrenomP, DteNaissance , TelephoneP,AdresseP , NumD#)
+Dossier(NumD , ......)
+Diagnotic(Num_Diag,........ , Num_rdv# )
+Ordonnance(Num_ord,Designation,....., Num_diag#)
+Medicament(codeMedi ,Designation....,#Num_Ord )
+
