@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from .models import RendezVous
 
-# Create your views here.
+def affiche_rdv(request):
+    rendezvous = RendezVous.objects.all()
+    return render(request, 'index.html', {'rendezvous': rendezvous})
