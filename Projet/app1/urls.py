@@ -1,9 +1,9 @@
 from django.urls import path
 from . import views
 
-urlpatterns = [ ...,
-               
-    path('rdv',views.affiche_rdv())
+urlpatterns = [ 
+              
+    path('RendezVous/',views.affiche_rdv,name='RendezVous')
 
 ]
 
