@@ -6,3 +6,8 @@ def affiche_rdv(request):
     rendezvous = RendezVous.objects.all()
     return render(request, 'index.html', {'rendezvous': rendezvous})
 
+def page_authentification(request):
+    return render(request, 'page_authentification.html')
+
+
+
