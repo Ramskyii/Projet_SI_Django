@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import affiche_rdv
+from . import views
 
 urlpatterns = [ ...,
                
-    path('rdv', affiche_rdv ,name= 'liste_rdv'),
+    path('rdv',views.affiche_rdv())
 
 ]
 
