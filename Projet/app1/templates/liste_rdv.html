@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Liste des Rendez-vous</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Numero RDV</th>
+            <th>Date RDV</th>
+            <th>Patient</th>
+            <th>Medecin</th>
+            <th>Salle</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for rdv in rdvs %}
+            <tr>
+                <td>{{ rdv.Num_rdv }}</td>
+                <td>{{ rdv.Date_rdv}}</td>
+                <td>{{ rdv.Num_Patient.Nom_P }} {{rdv.Num_Patient.Prenom_P}}</td>
+                <td>{{ rdv.Num_Medecin.Nom_M }} {{ rdv.Num_Medecin.Prenom_M }}</td>
+                <td>{{ rdv.Num_Salle}}</td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'ajouter_rdv' %}"><button>Ajouter un Rendez-vous</button></a>
+</body>
+</html>

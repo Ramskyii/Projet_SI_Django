@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un Rendez-vous</title>
+</head>
+<body>
+
+<h1>Ajouter un Rendez-vous</h1>
+
+<form method="post" action="{% url 'ajouter_rdv' %}">
+    {% csrf_token %}
+
+    <label for="id_Date_rdv">Date du Rendez-vous:</label>
+    {{ form.Date_rdv }}
+    <br>
+
+    <label for="id_Num_Medecin">Médecin:</label>
+    {{ form.Num_Medecin }}
+    <br>
+
+    <label for="id_Num_Patient">Patients</label>
+    {{form.Num_Patient}}
+    <br>
+
+    <label for="id_Num_Salle">Salle</label>
+    {{form.salle}}
+    <br>
+
+
+
+    <br><br>
+    <button type="submit">Ajouter Rendez-vous</button>
+</form>
+
+</body>
+</html>
