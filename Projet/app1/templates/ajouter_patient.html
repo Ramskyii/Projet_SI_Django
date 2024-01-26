@@ -12,7 +12,30 @@
 
 <form method="post" action="{% url 'ajouter_patient' %}">
     {% csrf_token %}
-    {{ form.as_p }}
+    <div class="form-group">
+        <label for="{{ form.Nom_M.id_for_label }}">Nom:</label>
+        {{ form.Nom_P }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.Prenom_M.id_for_label }}">Prénom:</label>
+        {{ form.Prenom_P }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.Telephone_M.id_for_label }}">Date de naissance:</label>
+        {{ form.DateNaissance}}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.Telephone_M.id_for_label }}">Téléphone:</label>
+        {{ form.Telephone_P}}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.Telephone_M.id_for_label }}">Adresse Postale:</label>
+        {{ form.Adresse_P}}
+    </div>
     <br><br>
     <button type="submit">Ajouter Patient</button>
 </form>
