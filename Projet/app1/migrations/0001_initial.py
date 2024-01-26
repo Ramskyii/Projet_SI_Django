@@ -133,4 +133,48 @@ class Migration(migrations.Migration):
                 on_delete=django.db.models.deletion.CASCADE, to="app1.rendezvous"
             ),
         ),
+        migrations.CreateModel(
+            name="Salle",
+            fields=[
+                ("Num_salle", models.AutoField(primary_key=True, serialize=False)),
+                (
+                    "type_salle",
+                    models.CharField(
+                        choices=[
+                            ("operation", "salle d'opération"),
+                            ("consultation", "salle de consultation"),
+                        ],
+                        max_length=20,
+                    ),
+                ),
+            ],
+        ),
+        migrations.AddField(
+            model_name="rendezvous",
+            name="Num_Medecin",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="app1.medecin",
+            ),
+            preserve_default=False,
+        ),
+        migrations.AddField(
+            model_name="rendezvous",
+            name="Num_Patient",
+            field=models.OneToOneField(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="app1.patient",
+            ),
+            preserve_default=False,
+        ),
+        migrations.AddField(
+            model_name="rendezvous",
+            name="salle",
+            field=models.ForeignKey(
+                default=1, on_delete=django.db.models.deletion.CASCADE, to="app1.salle"
+            ),
+            preserve_default=False,
+        ),
     ]

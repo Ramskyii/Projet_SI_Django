@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 class Patient(models.Model) : 
     Num_P = models.AutoField(primary_key=True)
@@ -7,7 +8,7 @@ class Patient(models.Model) :
     DateNaissance = models.DateField()
     Telephone_P = models.CharField(max_length = 10, help_text = 'Entrez un numero de telephone valable svp')
     Adresse_P = models.CharField(max_length = 50)
-    
+   
     
 
 class Medecin(models.Model) : 

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ajouter un Medecin</h1>
+
+<form method="post" action="{% url 'ajouter_medecin' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="{{ form.Nom_M.id_for_label }}">Nom:</label>
+        {{ form.Nom_M }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.Prenom_M.id_for_label }}">Prénom:</label>
+        {{ form.Prenom_M }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.Telephone_M.id_for_label }}">Téléphone:</label>
+        {{ form.Telephone_M }}
+    </div>
+
+    <br><br>
+    <button type="submit">Ajouter Medecin</button>
+</form>
+</body>
+</html>
