@@ -8,7 +8,11 @@ class Patient(models.Model) :
     DateNaissance = models.DateField()
     Telephone_P = models.CharField(max_length = 10, help_text = 'Entrez un numero de telephone valable svp')
     Adresse_P = models.CharField(max_length = 50)
-    
+    choix_genre = [
+        ('M', 'Masculin'),
+        ('F', 'Feminin'),
+    ]
+    Genre = models.CharField(max_length = 1,choices = choix_genre)
 
 class Medecin(models.Model) : 
     Num_M = models.AutoField(primary_key=True)
