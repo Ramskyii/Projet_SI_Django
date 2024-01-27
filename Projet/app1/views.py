@@ -32,13 +32,6 @@ def prefillPatient(request, pk):
     context = {'form': form}
     return render(request, 'ajouter_patient.html', context) 
 
-
-
-def liste_medecins(request): 
-    medecins = Medecin.objects.all()
-    return render(request, 'liste_medecins.html', {'medecins': medecins})
-
-
 def page_authentification(request):
     return render(request, 'page_authentification.html')
 
@@ -60,7 +53,7 @@ def ajouter_patient(request):
     else:
         form = PatientForm()
 
-    return render(request, 'liste_patients.html', {'form': form})
+    return render(request, 'ajouter_patient.html', {'form': form})
 
 
 
@@ -69,15 +62,46 @@ def supprimer_patient(request, pk):
     patient.delete()
     return redirect('liste_patients')
 
+def liste_medecins(request): 
+    query = request.GET.get('q')
+    medecins = Medecin.objects.all()
+    if query:
+        medecins = medecins.filter(Nom_M__icontains=query)
 
+    return render(request, 'liste_medecins.html', {'medecins': medecins, 'query':query})
+
+def prefillMedecin(request, pk):
+    medecin = Medecin.objects.get(Num_M=pk)
+    form = MedecinForm(instance=medecin)
+
+    if request.method == 'POST':
+        form = MedecinForm(request.POST, instance=medecin)
+        if form.is_valid():
+            form.save()
+            return redirect('liste_medecins')
+        
+    request.session['medecin_to_update'] = pk
+
+    context = {'form': form}
+    return render(request, 'ajouter_medecin.html', context) 
+
+def supprimer_medecin(request, pk):
+    medecin = Medecin.objects.get(Num_M=pk)
+    medecin.delete()
+    return redirect('liste_medecins')
 
 
 def ajouter_medecin(request):
+    medecin_to_update = request.session.pop('medecin_to_update', None)
     if request.method == 'POST':
         form = MedecinForm(request.POST)
         if form.is_valid():
+            if form.is_valid():
+                if medecin_to_update:
+                    medecin = Medecin.objects.get(Num_M= medecin_to_update)
+                    form = MedecinForm(request.POST, instance=medecin)
             form.save()
-            return redirect('ajouter_medecin')
+            return redirect('liste_medecins')  
     else:
         form = MedecinForm()
 

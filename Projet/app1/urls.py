@@ -12,13 +12,15 @@ from .views import prefillRendezVous
 from .views import supprimer_rdv
 from .views import prefillPatient
 from .views import supprimer_patient
+from .views import supprimer_medecin
+from .views import prefillMedecin
  
 
 urlpatterns = [ 
     path('',page_authentification,name='page_authentification'),          
     path('ajouter_patient/',ajouter_patient,name='ajouter_patient'),
     path('liste_patients/',liste_patients, name ='liste_patients'),
-    path('ajouter_medecin/',ajouter_medecin, name='ajouter_medecin'),
+    path('ajouter_medecin/', ajouter_medecin, name='ajouter_medecin'),
     path('liste_medecins/',liste_medecins, name='liste_medecins'),
     path('acceuil/',acceuil,name='acceuil'),
     path('ajouter_rdv',ajouter_rdv,name='ajouter_rdv'),
@@ -28,5 +30,9 @@ urlpatterns = [
     path('supprimer_rdv/<int:pk>/',supprimer_rdv,name='supprimer_rdv'),
     path('prefill_patient/<int:pk>/', prefillPatient, name='prefill_patient'),
     path('supprimer_patient/<int:pk>/',supprimer_patient,name='supprimer_patient'),
+
+    
+    path('supprimer_medecin/<int:pk>/',supprimer_medecin,name='supprimer_medecin'),
+    path('prefillMedecin/<int:pk>/', prefillMedecin, name='prefillMedecin'),
 ]
 

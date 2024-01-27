@@ -31,6 +31,9 @@ class Medecin(models.Model) :
     ]
     specialite = models.CharField(max_length = 50, choices = choix_speciailte)
     
+    def delete(self):
+        return super().delete()  
+    
 class RendezVous(models.Model) : 
     Num_rdv = models.AutoField(primary_key=True)
     Date_rdv = models.DateTimeField()

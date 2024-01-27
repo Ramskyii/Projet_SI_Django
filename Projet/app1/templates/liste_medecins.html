@@ -7,7 +7,10 @@
 </head>
 <body>
     <h1>Liste des Medecins</h1>
-
+    <form method="get" action="{% url 'liste_medecins' %}">
+        <input type="text" name="q" placeholder="Recherche par Noms des Medecins" value="{{ query }}">
+        <button type="submit">Rechercher</button>
+    </form>
 <table border="1">
     <thead>
         <tr>
@@ -25,6 +28,12 @@
                 <td>{{ medecin.Prenom_M }}</td>
                 <td>{{ medecin.Telephone_M }}</td>
                 <td>{{ medecin.specialite }}</td>
+                <td>
+                    <a href="{% url 'prefillMedecin' pk=medecin.Num_M %}"><button>Modifier</button></a>
+                </td> 
+                <td>
+                    <a href="{% url 'supprimer_medecin' pk=medecin.Num_M %}"><button>Supprimer</button></a>
+                </td>
               
             </tr>
         {% endfor %}
