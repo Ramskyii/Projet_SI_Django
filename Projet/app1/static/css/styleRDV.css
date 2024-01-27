@@ -1,114 +1,82 @@
+/* Reset some default styling */
+body, h1, h4, p, label, button, select {
+    margin: 0;
+    padding: 0;
+}
 
+/* Apply a background color to the body */
+body {
+    background-color: #f4f4f4;
+    font-family: 'Roboto', sans-serif;
+}
 
-.book_section h4 {
-    position: relative;
-    padding-bottom: 5px;
-    margin-bottom: 35px;
-  }
-  
-  .book_section h4 span {
-    color: #00c6a9;
-  }
-  
-  .book_section h4::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 75px;
-    height: 2px;
-    background-color: #00c6a9;
-  }
-  
-  .book_section form {
-    padding: 35px 45px;
-    -webkit-box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.07);
-            box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.07);
-  }
-  
-  .book_section form label {
-    color: #000000;
-  }
-  
-  .book_section form .form-control {
-    width: 100%;
-    background-color: transparent;
-    border: 1px solid #00c6a9;
-    height: 45px;
-    outline: none;
-    -webkit-box-shadow: none;
-            box-shadow: none;
-    border-radius: 5px;
-    padding: 0 15px;
-  }
-  
-  .book_section form .form-control::-webkit-input-placeholder {
-    color: #00c6a9;
-  }
-  
-  .book_section form .form-control:-ms-input-placeholder {
-    color: #00c6a9;
-  }
-  
-  .book_section form .form-control::-ms-input-placeholder {
-    color: #00c6a9;
-  }
-  
-  .book_section form .form-control::placeholder {
-    color: #00c6a9;
-  }
-  
-  .book_section form #inputDate {
-    color: #00c6a9;
-  }
-  
-  .book_section form #inputDate input {
-    color: #00c6a9;
-  }
-  
-  .book_section form button.btn {
-    background-color: #252525;
-    color: #ffffff;
-    padding: 10px 45px;
-    border-radius: 5px;
-    margin-top: 10px;
-    text-transform: uppercase;
-  }
-  
-  .book_section .date_icon {
-    right: 10px;
-    height: 100%;
-    position: absolute;
-    background-color: transparent;
-    border: none;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    color: #00c6a9;
-  }
-  
-  .book_section .nice-select:after {
-    content: "\f107";
-    font-family: FontAwesome;
-    border: none;
-    width: auto;
-    height: auto;
-    -webkit-transform: none;
-            transform: none;
-    top: 7px;
-    font-size: 20px;
+/* Center the main content */
+.container {
+    margin: 50px auto;
+}
+
+/* Style the form container */
+.col {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style form elements */
+.form-row {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
     font-weight: bold;
-    -webkit-transition: all .3s;
-    transition: all .3s;
-  }
-  
-  .book_section .nice-select.open:after {
-    content: "\f106";
-  }
- 
+}
+
+select, input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Style the submit button */
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Style the date input */
+.input-group {
+    position: relative;
+}
+
+.date_icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+    }
+
+    .col {
+        padding: 15px;
+    }
+}
