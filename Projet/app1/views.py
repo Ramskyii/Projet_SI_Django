@@ -19,14 +19,17 @@ def liste_patients(request):
 
 def prefillPatient(request, pk):
     patient = Patient.objects.get(Num_P=pk)
-    form = PatientForm(request.POST or None, instance=patient)
+    form = PatientForm(instance=patient)
 
     if request.method == 'POST':
+        form = PatientForm(request.POST, instance=patient)
         if form.is_valid():
             form.save()
             return redirect('liste_patients')
+        
+    request.session['patient_to_update'] = pk
 
-    context = {'form': form, 'patient': patient}
+    context = {'form': form}
     return render(request, 'ajouter_patient.html', context) 
 
 
@@ -42,11 +45,18 @@ def page_authentification(request):
 
 
 def ajouter_patient(request):
+    patient_to_update = request.session.pop('patient_to_update', None)
+
     if request.method == 'POST':
         form = PatientForm(request.POST)
         if form.is_valid():
+            if patient_to_update:
+                patient = Patient.objects.get(Num_P= patient_to_update)
+                form = PatientForm(request.POST, instance=patient)
             form.save()
+            print("Patient ajouté ou mis à jour avec succès!")
             return redirect('liste_patients')  
+        
     else:
         form = PatientForm()
 
