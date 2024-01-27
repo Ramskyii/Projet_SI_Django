@@ -79,7 +79,7 @@ class Medicament(models.Model) :
 class Salle (models.Model) : 
     Num_salle = models.AutoField(primary_key=True)
     choix_de_type = [
-        ('operation', 'salle d\'opération'),
         ('consultation', 'salle de consultation'),
+        ('operation', 'salle d\'opération'),
     ]
-    type_salle = models.CharField(max_length = 20, choices = choix_de_type)
+    type_salle = models.CharField(max_length = 50, choices = choix_de_type)

@@ -5,6 +5,7 @@ from .forms import MedecinForm
 from .models import Medecin
 from .forms import RendezVousForm
 from .models import RendezVous
+from .models import Salle
 
 
 def liste_patients(request):
@@ -117,7 +118,10 @@ def index(request):
 
 def ajouter_rdv(request):
     rendezvous_to_update = request.session.pop('rendezvous_to_update', None)
-
+    medecins = Medecin.objects.all()
+    patients = Patient.objects.all()
+    salles = Salle.objects.all()
+    
     if request.method == 'POST':
         form = RendezVousForm(request.POST)
         if form.is_valid():
@@ -132,7 +136,7 @@ def ajouter_rdv(request):
     else:
         form = RendezVousForm()
 
-    return render(request, 'ajouter_rdv.html', {'form': form})
+    return render(request, 'ajouter_rdv.html', {'form': form, 'medecins' : medecins, 'patients' : patients, 'salles' : salles})
 
 
 
