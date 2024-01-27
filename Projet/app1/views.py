@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PatientForm
 from .models import Patient
 from .forms import MedecinForm
@@ -10,6 +10,22 @@ from .models import RendezVous
 def liste_patients(request):
     patients = Patient.objects.all()
     return render(request, 'liste_patients.html', {'patients': patients})
+
+
+def prefillPatient(request, pk):
+    patient = Patient.objects.get(Num_P=pk)
+    form = RendezVousForm(instance=patient)
+
+    if request.method == 'POST':
+        form = RendezVousForm(request.POST, instance=patient)
+        if form.is_valid():
+            form.save()
+            return redirect('liste_patients')
+        
+    request.session['patient_to_update'] = pk
+
+    context = {'form': form}
+    return render(request, 'ajouter_patient.html', context)
 
 
 def liste_medecins(request): 
@@ -55,11 +71,16 @@ def index(request):
 
 
 def ajouter_rdv(request):
+    rendezvous_to_update = request.session.pop('rendezvous_to_update', None)
+
     if request.method == 'POST':
         form = RendezVousForm(request.POST)
         if form.is_valid():
+            if rendezvous_to_update:
+                rendezvous = RendezVous.objects.get(Num_rdv=rendezvous_to_update)
+                form = RendezVousForm(request.POST, instance=rendezvous)
             form.save()
-            print("Rendez-vous ajouté avec succès!")
+            print("Rendez-vous ajouté ou mis à jour avec succès!")
             return redirect('liste_rdv')
         else:
             print("Formulaire invalide. Erreurs :", form.errors)
@@ -71,5 +92,31 @@ def ajouter_rdv(request):
 
 
 def liste_rdv(request):
+    query = request.GET.get('q')
     rdvs= RendezVous.objects.all()
-    return render(request,'liste_rdv.html',{'rdvs': rdvs})
+
+    if query:
+        rdvs = rdvs.filter(Num_Patient__Nom_P__icontains=query)
+
+    return render(request,'liste_rdv.html',{'rdvs': rdvs , 'query': query})
+
+def prefillRendezVous(request, pk):
+    rendezvous = RendezVous.objects.get(Num_rdv=pk)
+    form = RendezVousForm(instance=rendezvous)
+
+    if request.method == 'POST':
+        form = RendezVousForm(request.POST, instance=rendezvous)
+        if form.is_valid():
+            form.save()
+            return redirect('liste_rdv')
+        
+    request.session['rendezvous_to_update'] = pk
+
+    context = {'form': form}
+    return render(request, 'ajouter_rdv.html', context)
+
+
+def supprimer_rdv(request,pk):
+    rendezvous = get_object_or_404(RendezVous,Num_rdv = pk)
+    rendezvous.delete()
+    return redirect('liste_rdv')

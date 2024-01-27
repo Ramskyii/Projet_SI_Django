@@ -1,3 +1,4 @@
+from typing import Any
 from django.db import models
 
 
@@ -24,8 +25,11 @@ class RendezVous(models.Model) :
     Num_rdv = models.AutoField(primary_key=True)
     Date_rdv = models.DateTimeField()
     salle = models.ForeignKey('Salle', on_delete=models.CASCADE)
-    Num_Patient = models.OneToOneField(Patient,on_delete = models.CASCADE)
+    Num_Patient = models.ForeignKey(Patient,on_delete = models.CASCADE)
     Num_Medecin = models.ForeignKey(Medecin,on_delete = models.CASCADE)
+
+    def delete(self):
+        return super().delete()  
     
 
 class Dossier(models.Model) : 

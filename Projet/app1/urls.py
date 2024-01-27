@@ -8,6 +8,9 @@ from .views import acceuil
 from .views import ajouter_rdv
 from .views import liste_rdv
 from .views import index
+from .views import prefillRendezVous
+from .views import supprimer_rdv
+from .views import prefillPatient
  
 
 urlpatterns = [ 
@@ -20,5 +23,8 @@ urlpatterns = [
     path('ajouter_rdv',ajouter_rdv,name='ajouter_rdv'),
     path('liste_rdv/',liste_rdv,name='liste_rdv'),
     path('index/',index,name='Home'),
+    path('prefill_rendezVous/<int:pk>/',prefillRendezVous,name='prefill_rendezVous'),
+    path('supprimer_rdv/<int:pk>/',supprimer_rdv,name='supprimer_rdv'),
+    path('prefill_patient/<int:pk>/',prefillPatient,name='prefill_patient'),
 ]
 

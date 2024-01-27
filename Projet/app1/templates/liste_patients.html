@@ -26,6 +26,9 @@
                 <td>{{ patient.Prenom_P }}</td>
                 <td>{{ patient.DateNaissance }}</td>
                 <td>{{ patient.Genre }}</td>
+                <td>
+                    <a href="{% url 'prefill_patient' pk=patient.Num_P %}"><button>Modifier</button></a>
+                </td>  
                 
             </tr>
         {% endfor %}
