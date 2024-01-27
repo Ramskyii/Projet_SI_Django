@@ -8,24 +8,27 @@ from .models import RendezVous
 
 
 def liste_patients(request):
+
+    query = request.GET.get('q')
     patients = Patient.objects.all()
-    return render(request, 'liste_patients.html', {'patients': patients})
+    if query:
+        patients = patients.filter(Nom_P__icontains=query)
+
+    return render(request, 'liste_patients.html', {'patients': patients, 'query': query})
 
 
 def prefillPatient(request, pk):
     patient = Patient.objects.get(Num_P=pk)
-    form = RendezVousForm(instance=patient)
+    form = PatientForm(request.POST or None, instance=patient)
 
     if request.method == 'POST':
-        form = RendezVousForm(request.POST, instance=patient)
         if form.is_valid():
             form.save()
             return redirect('liste_patients')
-        
-    request.session['patient_to_update'] = pk
 
-    context = {'form': form}
-    return render(request, 'ajouter_patient.html', context)
+    context = {'form': form, 'patient': patient}
+    return render(request, 'ajouter_patient.html', context) 
+
 
 
 def liste_medecins(request): 
@@ -43,11 +46,19 @@ def ajouter_patient(request):
         form = PatientForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('ajouter_patient')  
+            return redirect('liste_patients')  
     else:
         form = PatientForm()
 
-    return render(request, 'ajouter_patient.html', {'form': form})
+    return render(request, 'liste_patients.html', {'form': form})
+
+
+
+def supprimer_patient(request, pk):
+    patient = Patient.objects.get(Num_P=pk)
+    patient.delete()
+    return redirect('liste_patients')
+
 
 
 

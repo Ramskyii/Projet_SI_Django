@@ -14,6 +14,8 @@ class Patient(models.Model) :
         ('F', 'Feminin'),
     ]
     Genre = models.CharField(max_length = 1,choices = choix_genre)
+    def delete(self):
+        return super().delete()  
 
 class Medecin(models.Model) : 
     Num_M = models.AutoField(primary_key=True)
