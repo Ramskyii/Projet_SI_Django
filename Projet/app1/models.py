@@ -35,6 +35,15 @@ class RendezVous(models.Model) :
     salle = models.ForeignKey('Salle', on_delete=models.CASCADE)
     Num_Patient = models.ForeignKey(Patient,on_delete = models.CASCADE)
     Num_Medecin = models.ForeignKey(Medecin,on_delete = models.CASCADE)
+    choix_departement = [
+        ('Card','Cardiology'),
+        ('Neuro','Neurology'),
+        ('Urol','Urology'),
+        ('Rheum','Rheumatology'),
+        ('ENT','Ear, Nose, and Throat'),
+    ]
+
+    departement = models.CharField(max_length = 50, choices = choix_departement)
 
     def delete(self):
         return super().delete()  

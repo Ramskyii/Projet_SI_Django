@@ -29,7 +29,7 @@ class RendezVousForm(forms.ModelForm):
     
         medecins = Medecin.objects.all()
         self.fields['Num_Medecin'].queryset = medecins
-        self.fields['Num_Medecin'].label_from_instance = lambda obj: f'{obj.Nom_M} {obj.Prenom_M}'
+        self.fields['Num_Medecin'].label_from_instance = lambda obj: f'{obj.Nom_M} {obj.Prenom_M} {obj.specialite}'
 
         patients = Patient.objects.all()
         self.fields['Num_Patient'].queryset = patients

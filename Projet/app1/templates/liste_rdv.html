@@ -23,6 +23,7 @@
             <th>Patient</th>
             <th>Medecin</th>
             <th>Salle</th>
+            <th>Departement</th>
             
         </tr>
     </thead>
@@ -32,8 +33,9 @@
                 <td>{{ rdv.Num_rdv }}</td>
                 <td>{{ rdv.Date_rdv}}</td>
                 <td>{{ rdv.Num_Patient.Nom_P }} {{rdv.Num_Patient.Prenom_P}}</td>
-                <td>{{ rdv.Num_Medecin.Nom_M }} {{ rdv.Num_Medecin.Prenom_M }}</td>
+                <td>{{ rdv.Num_Medecin.Nom_M }} {{ rdv.Num_Medecin.Prenom_M }} {{rdv.Num_Medecin.specialite}}</td>
                 <td>{{ rdv.Num_Salle}}</td>
+                <td>{{ rdv.departement}}</td>
                 <td>
                     <a href="{% url 'prefill_rendezVous' pk=rdv.Num_rdv %}"><button>Modifier</button></a>
                 </td>   
