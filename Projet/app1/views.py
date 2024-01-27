@@ -6,6 +6,22 @@ from .models import Medecin
 from .forms import RendezVousForm
 from .models import RendezVous
 from .models import Salle
+from django.contrib.auth import authenticate, login
+
+def page_authentification(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('Home')  # Remplacez 'dashboard' par le nom de votre vue de tableau de bord
+        else:
+            # Gestion de l'erreur d'authentification (peut être personnalisée)
+            error_message = "Identifiant ou mot de passe incorrect."
+
+    return render(request, 'page_authentification.html', locals())
 
 
 def liste_patients(request):
@@ -33,8 +49,7 @@ def prefillPatient(request, pk):
     context = {'form': form}
     return render(request, 'ajouter_patient.html', context) 
 
-def page_authentification(request):
-    return render(request, 'page_authentification.html')
+
 
 
 
