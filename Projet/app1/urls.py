@@ -11,6 +11,7 @@ from .views import index
 from .views import prefillRendezVous
 from .views import supprimer_rdv
 from .views import prefillPatient
+from .views import supprimer_patient
  
 
 urlpatterns = [ 
@@ -25,6 +26,7 @@ urlpatterns = [
     path('index/',index,name='Home'),
     path('prefill_rendezVous/<int:pk>/',prefillRendezVous,name='prefill_rendezVous'),
     path('supprimer_rdv/<int:pk>/',supprimer_rdv,name='supprimer_rdv'),
-    path('prefill_patient/<int:pk>/',prefillPatient,name='prefill_patient'),
+    path('prefill_patient/<int:pk>/', prefillPatient, name='prefill_patient'),
+    path('supprimer_patient/<int:pk>/',supprimer_patient,name='supprimer_patient'),
 ]
 
