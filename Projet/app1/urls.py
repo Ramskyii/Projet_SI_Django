@@ -7,6 +7,7 @@ from .views import liste_medecins
 from .views import acceuil
 from .views import ajouter_rdv
 from .views import liste_rdv
+from .views import index
  
 
 urlpatterns = [ 
@@ -18,5 +19,6 @@ urlpatterns = [
     path('acceuil/',acceuil,name='acceuil'),
     path('ajouter_rdv',ajouter_rdv,name='ajouter_rdv'),
     path('liste_rdv/',liste_rdv,name='liste_rdv'),
+    path('index/',index,name='Home'),
 ]
 

@@ -50,6 +50,8 @@ def ajouter_medecin(request):
 def acceuil(request):
     return render(request,'acceuil.html')
 
+def index(request):
+    return render(request, 'index.html')
 
 
 def ajouter_rdv(request):
