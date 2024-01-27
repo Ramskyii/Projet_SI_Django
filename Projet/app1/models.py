@@ -20,6 +20,14 @@ class Medecin(models.Model) :
     Nom_M = models.CharField(max_length = 50)
     Prenom_M = models.CharField(max_length = 50)
     Telephone_M = models.CharField(max_length = 10, help_text = 'Entrez un numero de telephone valable svp')
+    choix_speciailte = [
+        ('Cardiologist','Cardiologist'),
+        ('Neurologist','Neurologist'),
+        ('Urologist','Urologist'),
+        ('Rheumatologist','Rheumatologist'),
+        ('Otolaryngologist','Otolaryngologist'),
+    ]
+    specialite = models.CharField(max_length = 50, choices = choix_speciailte)
     
 class RendezVous(models.Model) : 
     Num_rdv = models.AutoField(primary_key=True)
