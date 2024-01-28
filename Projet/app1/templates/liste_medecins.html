@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'css/styleListM.css' %}" rel="stylesheet" />
+    
     <title>Document</title>
 </head>
 <body>
@@ -13,7 +14,8 @@
         <input type="text" name="q" placeholder="Recherche par Noms des Medecins" value="{{ query }}">
         <button type="submit">Rechercher</button>
     </form>
-<table border="1">
+    <div class="table-wrapper">
+<table class="fl-table">
     <thead>
         <tr>
             <th>Nom</th>
@@ -26,7 +28,7 @@
     <tbody>
         {% for medecin in medecins %}
             <tr>
-                <td>{{ medecin.Nom_M }}</td>
+                <td> {{medecin.Nom_M }}</td>
                 <td>{{ medecin.Prenom_M }}</td>
                 <td>{{ medecin.Telephone_M }}</td>
                 <td>{{ medecin.specialite }}</td>
@@ -41,7 +43,7 @@
         {% endfor %}
     </tbody>
 </table>
-
+</div>
 
 <a href="{% url 'ajouter_medecin' %}"><button>Ajouter medecin</button></a>
 <a href="{% url 'Home' %}"><button>Retour à l'accueil</button></a>

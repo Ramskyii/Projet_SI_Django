@@ -1,10 +1,13 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/styleListP.css' %}" rel="stylesheet" />
     <title>Liste des Patients</title>
+    
 </head>
 <body>
 
@@ -13,8 +16,8 @@
     <input type="text" name="q" placeholder="Recherche par Noms des Patients" value="{{ query }}">
     <button type="submit">Rechercher</button>
 </form>
-
-<table border="1">
+<div class="table-wrapper">
+<table class="fl-table">
     <thead>
         <tr>
             <th>Nom</th>
@@ -47,7 +50,7 @@
         {% endfor %}
     </tbody>
 </table>
-
+</div>
 <a href="{% url 'ajouter_patient' %}"><button>Ajouter Patient</button></a>
 <a href="{% url 'Home' %}"><button>Retour à l'accueil</button></a>
 
