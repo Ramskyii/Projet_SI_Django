@@ -1,8 +1,11 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/styleD.css' %}" rel="stylesheet" />
+
     <title>Document</title>
 </head>
 <body>
@@ -15,7 +18,8 @@
     <label for="id_Date_rdv">Numero rdv</label>
     {{ form.Num_rendezvous }}
     <br>
-    <button type="submit">Enregistrer le Diagnostic</button>
+    <button class="samir" type="submit">Enregistrer le Diagnostic</button>
   </form>
+  <a href="{% url 'liste_diagnostic' %}"> <button>Retour</button></a>
 </body>
 </html>
