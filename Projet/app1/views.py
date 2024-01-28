@@ -251,24 +251,21 @@ def Dossier_medical(request, patient_id):
     return render(request, 'dossier_medical.html', {'patient': patient, 'form': form, 'dossier_medical': dossier})
 
 
-def ajouter_diagnostic(request, rendezvous_id):
-    rendezvous = get_object_or_404(RendezVous, pk=rendezvous_id)
-    existing_diagnostic = Diagnostic.objects.filter(Num_rendezvous=rendezvous)
-    
-    if existing_diagnostic.exists():
-        # Mettre à jour le diagnostic existant
-        form = DiagnosticForm(request.POST, instance=existing_diagnostic.first())
-    else:
-        # Créer un nouveau diagnostic
-        form = DiagnosticForm(request.POST)
+def ajouter_diagnostic(request) :
+    diagnostic_to_update = request.session.pop('diagnostic_to_update', None)
+    rendezvous = RendezVous.objects.all()
+
     if request.method == 'POST':
         form = DiagnosticForm(request.POST)
         if form.is_valid():
-            diagnostic = form.save(commit=False)
-            diagnostic.Num_rendezvous = rendezvous
-            diagnostic.save()
-            return redirect('detail_rendezvous', rendezvous_id=rendezvous_id)
+            if diagnostic_to_update:
+                diagno = Diagnostic.objects.get(Num_Diag = diagnostic_to_update)
+                form = DiagnosticForm(request.POST, instance = diagno)
+            form.save()
+            return redirect('liste_rdv')
+        else:
+            print("Formulaire invalide. Erreurs :", form.errors)
     else:
         form = DiagnosticForm()
 
-    return render(request, 'diagnostic.html', {'form': form, 'rendezvous': rendezvous})
+    return render(request, 'diagnostic.html', {'form' : form , 'rendezvous' : rendezvous})
