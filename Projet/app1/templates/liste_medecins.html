@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static 'css/styleListM.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/styleListMedecins.css' %}" rel="stylesheet" />
     
     <title>Document</title>
 </head>
@@ -44,8 +44,11 @@
     </tbody>
 </table>
 </div>
+<footer>
 
-<a href="{% url 'ajouter_medecin' %}"><button>Ajouter medecin</button></a>
-<a href="{% url 'Home' %}"><button>Retour à l'accueil</button></a>
+    <a href="{% url 'ajouter_medecin' %}"><button>Ajouter medecin</button></a>
+    <a href="{% url 'Home' %}"><button>Retour à l'accueil</button></a>
+    
+</footer>
 </body>
 </html>
