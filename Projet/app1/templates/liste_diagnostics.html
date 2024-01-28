@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- liste_diagnostics.html -->
+
+
+
+{% block content %}
+    <h2>Liste des Diagnostics</h2>
+    <ul>
+        {% for diagnostic in diagnostics %}
+            <li>{{ diagnostic.Desc_diag }} (Rendez-vous: {{ diagnostic.Num_rendezvous.Num_rdv }})</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+<a href="{% url 'ajouter_diagnostic' %}"><button>Ajouter diagnostic</button></a>
+<a href="{% url 'Home' %}"><button>Retour à l'accueil</button></a>
+
+</body>
+</html>

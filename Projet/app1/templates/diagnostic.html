@@ -6,14 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Ajouter un Diagnostic pour {{ rendezvous.Num_Patient.Nom_P }} {{ rendezvous.Num_Patient.Prenom_P }}</h2>
+    <h2>Ajouter un Diagnostic</h2>
   <form method="post" action="{% url 'ajouter_diagnostic' %}">
     {% csrf_token %}
     <label for="id_Date_rdv">Diagnostic</label>
-    {{ form.Date_rdv }}
+    {{ form.Desc_diag }}
     <br>
     <label for="id_Date_rdv">Numero rdv</label>
-    {{ form.rendvs }}
+    {{ form.Num_rendezvous }}
     <br>
     <button type="submit">Enregistrer le Diagnostic</button>
   </form>

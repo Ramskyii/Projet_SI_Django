@@ -44,9 +44,6 @@
                 <td>
                     <a href="{% url 'supprimer_rdv' pk=rdv.Num_rdv %}"><button>Supprimer</button></a>
                 </td>
-                <td>
-                    <a href="{% url 'ajouter_diagnostic' rendezvous_id=rdv.Num_rdv %}"><button>Ajouter Diagnostic</button></a>
-                </td>
                 
             </tr>
         {% endfor %}

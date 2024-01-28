@@ -16,9 +16,10 @@ from .views import prefillMedecin
 from .views import Dossier_medical
 from .views import Diagnostic
 from .views import ajouter_diagnostic
+from .views import liste_diagnostics
+from .views import afficher_diagnostic_rendezvous
 from django.conf import settings
 from django.conf.urls.static import static
-
  
 
 urlpatterns = [ 
@@ -31,7 +32,6 @@ urlpatterns = [
     path('ajouter_rdv',ajouter_rdv,name='ajouter_rdv'),
     path('liste_rdv/',liste_rdv,name='liste_rdv'),
     path('index/',index,name='Home'),
-    path('diagnostic/', Diagnostic, name='Diagnostic'),
     path('prefill_rendezVous/<int:pk>/',prefillRendezVous,name='prefill_rendezVous'),
     path('supprimer_rdv/<int:pk>/',supprimer_rdv,name='supprimer_rdv'),
     path('prefill_patient/<int:pk>/', prefillPatient, name='prefill_patient'),
@@ -39,7 +39,8 @@ urlpatterns = [
     path('dossier_medical/<int:patient_id>/', Dossier_medical, name='Dossier_medical'),
     path('supprimer_medecin/<int:pk>/',supprimer_medecin,name='supprimer_medecin'),
     path('prefillMedecin/<int:pk>/', prefillMedecin, name='prefillMedecin'),
-
+    path('liste_diagnostics/', liste_diagnostics, name='liste_diagnostic'),
+    path('afficher_diagnostic_rendezvous/<int:rendezvous_id>/', afficher_diagnostic_rendezvous, name='afficher_diagnostic_rendezvous'),
 ]
 
 if settings.DEBUG:

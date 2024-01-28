@@ -269,3 +269,15 @@ def ajouter_diagnostic(request) :
         form = DiagnosticForm()
 
     return render(request, 'diagnostic.html', {'form' : form , 'rendezvous' : rendezvous})
+
+
+def liste_diagnostics(request):
+    diagnostics = Diagnostic.objects.all()
+    return render(request, 'liste_diagnostics.html', {'diagnostics': diagnostics})
+
+
+def afficher_diagnostic_rendezvous(request, rendezvous_id):
+    rendezvous = get_object_or_404(RendezVous, pk=rendezvous_id)
+    diagnostic = rendezvous.diagnostics.first()  # Supposons qu'un rendez-vous a un seul diagnostic, ajustez selon vos besoins
+
+    return render(request, 'afficher_diagnostic_rendezvous.html', {'rendezvous': rendezvous, 'diagnostic': diagnostic})

@@ -39,8 +39,17 @@
                
             </tr>
         {% endfor %}
+    
     </tbody>
 </table>
+{% block content %}
+        <h2>Diagnostic pour le rendez-vous {{ rendezvous.Num_rdv }}</h2>
+            {% if diagnostic %}
+                <p>{{ diagnostic.Desc_diag }}</p>
+            {% else %}
+                <p>Aucun diagnostic n'est disponible pour ce rendez-vous.</p>
+            {% endif %}
+    {% endblock %}
 
 
 <a href="{% url 'Home' %}"><button>Retour à l'accueil</button></a>
