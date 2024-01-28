@@ -44,13 +44,14 @@
 </table>
 
 <h2>Diagnostic</h2>
-{% if dossier_medical.Num_Diagnostic %}
+{% if dossier_medical.Num_Patient.Num_rdv.Num_Diagnostic %}
     <ul>
-        <li><strong>Description du Diagnostic :</strong> {{ dossier_medical.Num_Patient.Num_rdv.Num_diag.Desc_diag }}</li>
+        <li><strong>Description du Diagnostic :</strong> {{ dossier_medical.Num_Patient.Num_rdv.Num_Diagnostic.Desc_diag }}</li>
     </ul>
 {% else %}
     <p>Aucun diagnostic disponible pour le moment.</p>
 {% endif %}
+
 
 </body>
 </html>
