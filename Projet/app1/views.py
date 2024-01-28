@@ -236,7 +236,7 @@ def Dossier_medical(request, patient_id):
     diagnostics = Diagnostic.objects.filter(Num_rendezvous__Num_Patient=patient)
 
     if request.method == 'POST':
-        # Si le formulaire DiagnosticForm est soumis, traitez-le
+
         diagnostic_form = DiagnosticForm(request.POST)
         if diagnostic_form.is_valid():
             rendezvous = RendezVous.objects.filter(Num_Patient=patient).last()
@@ -245,10 +245,9 @@ def Dossier_medical(request, patient_id):
             diagnostic.save()
             return redirect('Dossier_medical', patient_id=patient.Num_P)
     else:
-        # Sinon, initialisez un formulaire vide
+
         diagnostic_form = DiagnosticForm()
 
-    # Initialisez le formulaire DossierForm
     form = DossierForm(instance=dossier)
 
     return render(request, 'dossier_medical.html', {'patient': patient, 'form': form, 'dossier_medical': dossier, 'diagnostics': diagnostics, 'diagnostic_form': diagnostic_form})
