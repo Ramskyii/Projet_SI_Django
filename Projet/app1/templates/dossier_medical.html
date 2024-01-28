@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'css/style_dossier.css' %}" rel="stylesheet" >
-
     <title>Dossier Médical</title>
 </head>
 <body>
@@ -15,7 +14,7 @@
 <ul>
     <li><strong>Nom :</strong> {{ dossier_medical.Num_Patient.Nom_P }}</li>
     <li><strong>Prénom :</strong> {{ dossier_medical.Num_Patient.Prenom_P }}</li>
-    <li><strong>Date de Naissance :</strong> {{ dossier_medical.Num_Patient.DateNaissance }}</li>
+    <li><strong>Date de Naissance :</strong> {{ dossier_medical.Num_Patient.DateNaissance|date:"d/m/Y" }}</li>
     <li><strong>Genre :</strong> {{ dossier_medical.Num_Patient.get_Genre_display }}</li>
     <li><strong>Adresse :</strong> {{ dossier_medical.Num_Patient.Adresse_P }}</li>
     <li><strong>Numéro de Téléphone :</strong> {{ dossier_medical.Num_Patient.Telephone_P }}</li>
@@ -27,30 +26,35 @@
         <tr>
             <th>Numéro RDV</th>
             <th>Date RDV</th>
-            <th>Medecin</th>
-            <th></th>
+            <th>Médecin</th>
         </tr>
     </thead>
     <tbody>
-        {% for rendezvous in dossier_medical.Num_Patient.rendezvous_set.all %}
-        <tr>
-            <td>{{ rendezvous.Num_rdv }}</td>
-            <td>{{ rendezvous.Date_rdv }}</td>
-            <td>{{ rendezvous.Num_Medecin.Nom_M }} {{ rendezvous.Num_Medecin.Prenom_M}}</td>
-        </tr>
-         {% endfor %}
-    
+        {% for rendezvous in dossier_medical.Num_Patient.rendezvous_set.all|dictsort:"Date_rdv" %}
+            <tr>
+                <td>{{ rendezvous.Num_rdv }}</td>
+                <td>{{ rendezvous.Date_rdv|date:"d/m/Y H:i" }}</td>
+                <td>{{ rendezvous.Num_Medecin.Nom_M }} {{ rendezvous.Num_Medecin.Prenom_M}}</td>
+            </tr>
+        {% endfor %}
     </tbody>
 </table>
 
 <h2>Diagnostic</h2>
-{% if dossier_medical.Num_Patient.Num_rdv.Num_Diagnostic %}
-    <ul>
-        <li><strong>Description du Diagnostic :</strong> {{ dossier_medical.Num_Patient.Num_rdv.Num_Diagnostic.Desc_diag }}</li>
-    </ul>
+{% if dossier_medical.Num_Patient.rendezvous_set.exists %}
+    {% with first_rendezvous=dossier_medical.Num_Patient.rendezvous_set.first %}
+        {% if first_rendezvous.Num_rendezvous.Num_Diagnostic %}
+            <ul>
+                <li><strong>Description du Diagnostic :</strong> {{ first_rendezvous.Num_rendezvous.Num_Diagnostic.Desc_diag }}</li>
+            </ul>
+        {% else %}
+            <p>Aucun diagnostic disponible pour le moment.</p>
+        {% endif %}
+    {% endwith %}
 {% else %}
-    <p>Aucun diagnostic disponible pour le moment.</p>
+    <p>Aucun rendez-vous disponible pour le moment.</p>
 {% endif %}
+
 
 <a href="{% url 'Home' %}"><button>Retour à l'accueil</button></a>
 

@@ -9,6 +9,8 @@ from .models import Salle
 from django.contrib.auth import authenticate, login
 from .models import Dossier
 from .forms import DossierForm
+from .models import Diagnostic
+from .forms import DiagnosticForm
 
 def page_authentification(request):
     if request.method == 'POST':
@@ -201,3 +203,7 @@ def supprimer_rdv(request,pk):
     rendezvous = get_object_or_404(RendezVous,Num_rdv = pk)
     rendezvous.delete()
     return redirect('liste_rdv')
+
+
+def dossier_medical(request,patient_id):
+    dossier_medical
