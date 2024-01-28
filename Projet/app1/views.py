@@ -9,12 +9,9 @@ from .models import Salle
 from django.contrib.auth import authenticate, login
 from .models import Dossier
 from .forms import DossierForm
-<<<<<<< HEAD
 from .models import Diagnostic
 from .forms import DiagnosticForm
-=======
 from django.contrib import messages
->>>>>>> 6bc49b1 (Contraint ps tout marche)
 
 def page_authentification(request):
     if request.method == 'POST':
@@ -233,5 +230,25 @@ def supprimer_rdv(request,pk):
     return redirect('liste_rdv')
 
 
-def dossier_medical(request,patient_id):
-    dossier_medical
+def Dossier_medical(request, patient_id):
+    patient = get_object_or_404(Patient, Num_P=patient_id)
+    dossier, created = Dossier.objects.get_or_create(Num_Patient=patient)
+    diagnostics = Diagnostic.objects.filter(Num_rendezvous__Num_Patient=patient)
+
+    if request.method == 'POST':
+        # Si le formulaire DiagnosticForm est soumis, traitez-le
+        diagnostic_form = DiagnosticForm(request.POST)
+        if diagnostic_form.is_valid():
+            rendezvous = RendezVous.objects.filter(Num_Patient=patient).last()
+            diagnostic = diagnostic_form.save(commit=False)
+            diagnostic.Num_rendezvous = rendezvous
+            diagnostic.save()
+            return redirect('Dossier_medical', patient_id=patient.Num_P)
+    else:
+        # Sinon, initialisez un formulaire vide
+        diagnostic_form = DiagnosticForm()
+
+    # Initialisez le formulaire DossierForm
+    form = DossierForm(instance=dossier)
+
+    return render(request, 'dossier_medical.html', {'patient': patient, 'form': form, 'dossier_medical': dossier, 'diagnostics': diagnostics, 'diagnostic_form': diagnostic_form})

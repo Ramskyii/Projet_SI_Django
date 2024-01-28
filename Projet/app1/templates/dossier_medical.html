@@ -55,6 +55,12 @@
     <p>Aucun rendez-vous disponible pour le moment.</p>
 {% endif %}
 
+<h2>Ajouter diagnostic</h2>
+<form method="post" action="{% url 'Dossier_medical' patient_id=patient.Num_P %}">
+    {% csrf_token %}
+    {{ diagnostic_form.as_p }}
+    <button type="submit">Enregistrer diagnostic</button>
+</form>
 
 <a href="{% url 'Home' %}"><button>Retour à l'accueil</button></a>
 

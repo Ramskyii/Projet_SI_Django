@@ -17,6 +17,7 @@ from .views import prefillMedecin
 from .views import Dossier_medical
 from django.conf import settings
 from django.conf.urls.static import static
+
  
 
 urlpatterns = [ 
@@ -37,6 +38,8 @@ urlpatterns = [
     path('dossier_medical/<int:patient_id>/', Dossier_medical, name='Dossier_medical'),
     path('supprimer_medecin/<int:pk>/',supprimer_medecin,name='supprimer_medecin'),
     path('prefillMedecin/<int:pk>/', prefillMedecin, name='prefillMedecin'),
+
+
 ]
 
 if settings.DEBUG:

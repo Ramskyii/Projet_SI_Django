@@ -61,6 +61,9 @@ class Dossier(models.Model) :
     Num_D = models.AutoField(primary_key=True)
     Derniere_modif = models.DateTimeField(auto_now=True)
     Num_Patient = models.OneToOneField(Patient,on_delete = models.CASCADE)
+    
+    def get_diagnostics(self):
+        return Diagnostic.objects.filter(Num_rendezvous__Num_Patient=self.Num_Patient)
 
 class Diagnostic(models.Model) : 
     Num_Diag = models.AutoField(primary_key=True)

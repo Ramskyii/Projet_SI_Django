@@ -67,3 +67,4 @@ class DiagnosticForm(forms.ModelForm):
         model = Diagnostic
         fields = '__all__'
 
+
