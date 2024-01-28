@@ -13,7 +13,8 @@
 
 <h1>Liste des Patients</h1>
 <form method="get" action="{% url 'liste_patients' %}">
-    <input type="text" name="q" placeholder="Recherche par Noms des Patients" value="{{ query }}">
+    <label for="search">Recherche par Noms des Patients:</label>
+    <input type="text" id="search" name="q" placeholder="Entrez un nom" value="{{ query }}">
     <button type="submit">Rechercher</button>
 </form>
 <div class="table-wrapper">

@@ -1,8 +1,11 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/style_dossier.css' %}" rel="stylesheet" >
+
     <title>Dossier Médical</title>
 </head>
 <body>
@@ -25,20 +28,29 @@
             <th>Numéro RDV</th>
             <th>Date RDV</th>
             <th>Medecin</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        {% for rendezvous in Dossier.Num_Patient.rendezvous_set.all %}
-            <tr>
-                <td>{{ rendezvous.Num_rdv }}</td>
-                <td>{{ rendezvous.Date_rdv }}</td>
-                <td>{{ rendezvous.Num_M}}</td>
-            </tr>
-        {% endfor %}
+        {% for rendezvous in dossier_medical.Num_Patient.rendezvous_set.all %}
+        <tr>
+            <td>{{ rendezvous.Num_rdv }}</td>
+            <td>{{ rendezvous.Date_rdv }}</td>
+            <td>{{ rendezvous.Num_Medecin.Nom_M }} {{ rendezvous.Num_Medecin.Prenom_M}}</td>
+        </tr>
+         {% endfor %}
+    
     </tbody>
 </table>
 
-
+<h2>Diagnostic</h2>
+{% if dossier_medical.Num_Diagnostic %}
+    <ul>
+        <li><strong>Description du Diagnostic :</strong> {{ dossier_medical.Num_Patient.Num_rdv.Num_diag.Desc_diag }}</li>
+    </ul>
+{% else %}
+    <p>Aucun diagnostic disponible pour le moment.</p>
+{% endif %}
 
 </body>
 </html>
