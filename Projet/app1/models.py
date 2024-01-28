@@ -1,5 +1,6 @@
 from typing import Any
 from django.db import models
+from django.shortcuts import get_object_or_404
 
 
 class Patient(models.Model) : 
@@ -65,6 +66,15 @@ class Dossier(models.Model) :
     def get_diagnostics(self):
         return Diagnostic.objects.filter(Num_rendezvous__Num_Patient=self.Num_Patient)
 
+    def revevoir_diagnostics(self):
+        # Obtenez tous les rendez-vous associés à ce dossier médical
+        rendezvous_set = self.Num_Patient.rendezvous_set.all()
+
+        # Obtenez les diagnostics pour chaque rendez-vous
+        diagnostics = [get_object_or_404(Diagnostic, Num_rendezvous=rendezvous) for rendezvous in rendezvous_set]
+
+        return diagnostics
+    
 class Diagnostic(models.Model) : 
     Num_Diag = models.AutoField(primary_key=True)
     Desc_diag = models.CharField(max_length = 1000)
