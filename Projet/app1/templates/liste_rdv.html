@@ -1,8 +1,10 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/styleListRDV.css' %}" rel="stylesheet" />
     <title>Document</title>
 </head>
 <body>
@@ -34,7 +36,7 @@
                 <td>{{ rdv.Date_rdv}}</td>
                 <td>{{ rdv.Num_Patient.Nom_P }} {{rdv.Num_Patient.Prenom_P}}</td>
                 <td>{{ rdv.Num_Medecin.Nom_M }} {{ rdv.Num_Medecin.Prenom_M }} {{rdv.Num_Medecin.specialite}}</td>
-                <td>{{ rdv.Num_Salle}}</td>
+                <td>{{ rdv.salle.type_salle}}</td>
                 <td>{{ rdv.departement}}</td>
                 <td>
                     <a href="{% url 'prefill_rendezVous' pk=rdv.Num_rdv %}"><button>Modifier</button></a>
@@ -47,8 +49,11 @@
         {% endfor %}
     </tbody>
 </table>
+<div class="button-container">   
+        <a href="{% url 'ajouter_rdv' %}"><button>Ajouter un Rendez-vous</button></a>
+        <a href="{% url 'Home' %}"><button>Retour à l'accueil</button></a>
+    
 
-<a href="{% url 'ajouter_rdv' %}"><button>Ajouter un Rendez-vous</button></a>
-<a href="{% url 'Home' %}"><button>Retour à l'accueil</button></a>
+</div>
 </body>
 </html>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
@@ -6,91 +5,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{%  static 'css/bootstrap.css' %}" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link href="{% static 'css/styleRDV.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
     <title>Ajouter un Rendez-vous</title>
 </head>
 <body>
 
 <h1>Ajouter un Rendez-vous</h1>
-<section class="book_section layout_padding">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <form method="POST" action="{% url 'ajouter_rdv' %} ">
-                    {% csrf_token %}
-                    <h4>
-                        BOOK <span>APPOINTMENT</span>
-                    </h4>
-                    <div class="form-row ">
-                        <div class="form-group col-lg-4">
-                          <label for="inputPatientName">Patient</label>
-                          <select name="{{ form.Prenom_M.id_for_label }}" class="form-control wide" id="inputPatientName">
-                          {% for patient in patients %}
-                          <option value="{{ patient.Num_P}}">{{patient.Nom_P}} {{patient.Prenom_P}}</option>
-                          {% endfor %}
-                          </select>
-                        </div>
-                        <div class="form-group col-lg-4">
-                          <label for="inputDoctorName">Doctor's</label>
-                          <select name="{{form.medecin}}" class="form-control wide" id="inputDoctorName">
-                            {%for medecin in medecins%} 
-                            <option value=" {{medecin.Num_M }}">{{medecin.Nom_M}} {{medecin.Prenom_M}}</option>
-                            {%endfor%}
-                          </select>
-                        </div>
-                        <div class="form-group col-lg-4">
-                          <label for="inputDepartmentName">Department's</label>
-                            
-                                    <select class="form-control wide" name="departement">
-                                        <option value={{form.departement}}</option>
-                                    </select>
 
-                        </div>
-                    </div>
-                      <div class="form-row ">
-                        <div class="form-group col-lg-4">
-                          <label for="inputSymptoms">Salle</label>
-                          <select name="" class="form-control wide" id="inputSalle">
-                            {% for salle in salles %}
-                            <option value="{{salle.Num_Salle}}">{{salle.type_salle}}</option>
-                            {%endfor%}
-                          </select>
-                        </div>
-                        <div class="form-group col-lg-4">
-                          <label for="inputDate">Choose Date </label>
-                          <div class="input-group date" id="inputDate" data-date-format="mm-dd-yyyy">
-                            <div class="form-control">
+<form method="post" action="{% url 'ajouter_rdv' %}">
+    {% csrf_token %}
 
-                                {{ form.Date_rdv }}
+    <label for="id_Date_rdv">Date du Rendez-vous:</label>
+    {{ form.Date_rdv }}
+    <br>
 
-                            </div>
-                            <span class="input-group-addon date_icon">
-                              <i class="fa fa-calendar" aria-hidden="true"></i>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    
-                        <button type="submit">Submit Now</button>
-                      
-                </form>
+    <label for="id_Num_Medecin">Médecin:</label>
+    {{ form.Num_Medecin }}
+    <br>
 
-            </div>
-        </div>
-    </div>
-</section>
-<!-- bootstrap js -->
-<script src="{%  static 'vendor/bootstrap/js/bootstrap.js'%}"></script>
-<!-- nice select -->
+    <label for="id_Num_Patient">Patients</label>
+    {{form.Num_Patient}}
+    <br>
 
-<!-- owl slider -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<!-- datepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
-<!-- custom js -->
-<script src="{% static 'js/custom.js' %}"></script>
+    <label for="id_Num_Patient">Salles</label>
+      {{form.salle}}
+    <br>
+    <label for="id_Num_Departement">Departement</label>
+    {{form.departement}}
+    <br>
+
+
+
+    <br><br>
+    <button type="submit">Ajouter Rendez-vous</button>
+</form>
+
 </body>
 </html>

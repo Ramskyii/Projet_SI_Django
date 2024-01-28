@@ -1,82 +1,57 @@
-/* Reset some default styling */
-body, h1, h4, p, label, button, select {
+/* style.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
-/* Apply a background color to the body */
-body {
-    background-color: #f4f4f4;
-    font-family: 'Roboto', sans-serif;
+h1 {
+    color: #333;
 }
 
-/* Center the main content */
-.container {
-    margin: 50px auto;
-}
-
-/* Style the form container */
-.col {
+form {
+    width: 300px;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Style form elements */
-.form-row {
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
+    margin-top: 20px;
 }
 
 label {
     display: block;
-    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555;
 }
 
-select, input {
+input, select {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
-/* Style the submit button */
 button {
     background-color: #007bff;
     color: #fff;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
+    
 }
 
 button:hover {
-    background-color: #0056b3;
-}
-
-/* Style the date input */
-.input-group {
-    position: relative;
-}
-
-.date_icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-    .container {
-        margin: 20px auto;
-    }
-
-    .col {
-        padding: 15px;
-    }
+    background-color: #3071a9;
 }
