@@ -4,7 +4,6 @@ from .views import ajouter_patient
 from .views import liste_patients
 from .views import ajouter_medecin
 from .views import liste_medecins
-from .views import acceuil
 from .views import ajouter_rdv
 from .views import liste_rdv
 from .views import index
@@ -15,6 +14,8 @@ from .views import supprimer_patient
 from .views import supprimer_medecin
 from .views import prefillMedecin
 from .views import Dossier_medical
+from .views import Diagnostic
+from .views import ajouter_diagnostic
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -25,20 +26,19 @@ urlpatterns = [
     path('ajouter_patient/',ajouter_patient,name='ajouter_patient'),
     path('liste_patients/',liste_patients, name ='liste_patients'),
     path('ajouter_medecin/', ajouter_medecin, name='ajouter_medecin'),
+   path('diagnostic/<int:rendezvous_id>/', ajouter_diagnostic, name='ajouter_diagnostic'),
     path('liste_medecins/',liste_medecins, name='liste_medecins'),
-    path('acceuil/',acceuil,name='acceuil'),
     path('ajouter_rdv',ajouter_rdv,name='ajouter_rdv'),
     path('liste_rdv/',liste_rdv,name='liste_rdv'),
     path('index/',index,name='Home'),
+    path('diagnostic/', Diagnostic, name='Diagnostic'),
     path('prefill_rendezVous/<int:pk>/',prefillRendezVous,name='prefill_rendezVous'),
     path('supprimer_rdv/<int:pk>/',supprimer_rdv,name='supprimer_rdv'),
     path('prefill_patient/<int:pk>/', prefillPatient, name='prefill_patient'),
     path('supprimer_patient/<int:pk>/',supprimer_patient,name='supprimer_patient'),
-
     path('dossier_medical/<int:patient_id>/', Dossier_medical, name='Dossier_medical'),
     path('supprimer_medecin/<int:pk>/',supprimer_medecin,name='supprimer_medecin'),
     path('prefillMedecin/<int:pk>/', prefillMedecin, name='prefillMedecin'),
-
 
 ]
 

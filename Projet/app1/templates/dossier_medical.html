@@ -11,6 +11,7 @@
 
 <h1>Dossier Médical</h1>
 <h2>Informations Générales du Patient</h2>
+
 <ul>
     <li><strong>Nom :</strong> {{ dossier_medical.Num_Patient.Nom_P }}</li>
     <li><strong>Prénom :</strong> {{ dossier_medical.Num_Patient.Prenom_P }}</li>
@@ -35,35 +36,16 @@
                 <td>{{ rendezvous.Num_rdv }}</td>
                 <td>{{ rendezvous.Date_rdv|date:"d/m/Y H:i" }}</td>
                 <td>{{ rendezvous.Num_Medecin.Nom_M }} {{ rendezvous.Num_Medecin.Prenom_M}}</td>
+               
             </tr>
         {% endfor %}
     </tbody>
 </table>
 
-<h2>Diagnostic</h2>
-{% if dossier_medical.Num_Patient.rendezvous_set.exists %}
-    {% with first_rendezvous=dossier_medical.Num_Patient.rendezvous_set.first %}
-        {% if first_rendezvous.Num_rendezvous.Num_Diagnostic %}
-            <ul>
-                <li><strong>Description du Diagnostic :</strong> {{ first_rendezvous.Num_rendezvous.Num_Diagnostic.Desc_diag }}</li>
-            </ul>
-        {% else %}
-            <p>Aucun diagnostic disponible pour le moment.</p>
-        {% endif %}
-    {% endwith %}
-{% else %}
-    <p>Aucun rendez-vous disponible pour le moment.</p>
-{% endif %}
-
-<h2>Ajouter diagnostic</h2>
-<form method="post" action="{% url 'Dossier_medical' patient_id=patient.Num_P %}">
-    {% csrf_token %}
-    {{ diagnostic_form.as_p }}
-    <button type="submit">Enregistrer diagnostic</button>
-</form>
 
 <a href="{% url 'Home' %}"><button>Retour à l'accueil</button></a>
 <a href="{% url 'liste_patients' %}"><button>Retour</button></a>
+
 
 </body>
 </html>

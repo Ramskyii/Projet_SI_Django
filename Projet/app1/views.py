@@ -9,8 +9,9 @@ from .models import Salle
 from django.contrib.auth import authenticate, login
 from .models import Dossier
 from .forms import DossierForm
-from .models import Diagnostic
 from .forms import DiagnosticForm
+from .models import Diagnostic
+
 from django.contrib import messages
 
 def page_authentification(request):
@@ -168,9 +169,6 @@ def ajouter_medecin(request):
     return render(request, 'ajouter_medecin.html', {'form': form})
 
 
-def acceuil(request):
-    return render(request,'acceuil.html')
-
 def index(request):
     return render(request, 'index.html')
 
@@ -250,4 +248,27 @@ def Dossier_medical(request, patient_id):
 
     form = DossierForm(instance=dossier)
 
-    return render(request, 'dossier_medical.html', {'patient': patient, 'form': form, 'dossier_medical': dossier, 'diagnostics': diagnostics, 'diagnostic_form': diagnostic_form})
+    return render(request, 'dossier_medical.html', {'patient': patient, 'form': form, 'dossier_medical': dossier})
+
+
+def ajouter_diagnostic(request, rendezvous_id):
+    rendezvous = get_object_or_404(RendezVous, pk=rendezvous_id)
+    existing_diagnostic = Diagnostic.objects.filter(Num_rendezvous=rendezvous)
+    
+    if existing_diagnostic.exists():
+        # Mettre à jour le diagnostic existant
+        form = DiagnosticForm(request.POST, instance=existing_diagnostic.first())
+    else:
+        # Créer un nouveau diagnostic
+        form = DiagnosticForm(request.POST)
+    if request.method == 'POST':
+        form = DiagnosticForm(request.POST)
+        if form.is_valid():
+            diagnostic = form.save(commit=False)
+            diagnostic.Num_rendezvous = rendezvous
+            diagnostic.save()
+            return redirect('detail_rendezvous', rendezvous_id=rendezvous_id)
+    else:
+        form = DiagnosticForm()
+
+    return render(request, 'diagnostic.html', {'form': form, 'rendezvous': rendezvous})

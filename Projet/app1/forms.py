@@ -67,4 +67,11 @@ class DiagnosticForm(forms.ModelForm):
         model = Diagnostic
         fields = '__all__'
 
+    def __init__(self, *args, **kwargs):
+        super(DiagnosticForm, self).__init__(*args, **kwargs)
+
+        rendvs = RendezVous.objects.all()
+        self.fields['Num_rendezvous'].widget = CustomSalleWidget()
+        self.fields['Num_rendezvous'].queryset = rendvs
+        self.fields['Num_rendezvous'].label_from_instance = lambda obj: f'{obj.Num_rdv} {obj.Date_rdv} '
 

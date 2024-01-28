@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Ajouter un Diagnostic pour {{ rendezvous.Num_Patient.Nom_P }} {{ rendezvous.Num_Patient.Prenom_P }}</h2>
+  <form method="post" action="{% url 'ajouter_diagnostic' %}">
+    {% csrf_token %}
+    <label for="id_Date_rdv">Diagnostic</label>
+    {{ form.Date_rdv }}
+    <br>
+    <label for="id_Date_rdv">Numero rdv</label>
+    {{ form.rendvs }}
+    <br>
+    <button type="submit">Enregistrer le Diagnostic</button>
+  </form>
+</body>
+</html>
