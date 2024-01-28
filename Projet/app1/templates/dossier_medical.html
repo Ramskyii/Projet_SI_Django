@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossier Médical</title>
+</head>
+<body>
+
+<h1>Dossier Médical</h1>
+<h2>Informations Générales du Patient</h2>
+<ul>
+    <li><strong>Nom :</strong> {{ dossier_medical.Num_Patient.Nom_P }}</li>
+    <li><strong>Prénom :</strong> {{ dossier_medical.Num_Patient.Prenom_P }}</li>
+    <li><strong>Date de Naissance :</strong> {{ dossier_medical.Num_Patient.DateNaissance }}</li>
+    <li><strong>Genre :</strong> {{ dossier_medical.Num_Patient.get_Genre_display }}</li>
+    <li><strong>Adresse :</strong> {{ dossier_medical.Num_Patient.Adresse_P }}</li>
+    <li><strong>Numéro de Téléphone :</strong> {{ dossier_medical.Num_Patient.Telephone_P }}</li>
+</ul>
+<h2>Historique des Rendez-vous</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Numéro RDV</th>
+            <th>Date RDV</th>
+            <th>Medecin</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for rendezvous in Dossier.Num_Patient.rendezvous_set.all %}
+            <tr>
+                <td>{{ rendezvous.Num_rdv }}</td>
+                <td>{{ rendezvous.Date_rdv }}</td>
+                <td>{{ rendezvous.Num_M}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+</body>
+</html>

@@ -7,6 +7,8 @@ from .forms import RendezVousForm
 from .models import RendezVous
 from .models import Salle
 from django.contrib.auth import authenticate, login
+from .models import Dossier
+from .forms import DossierForm
 
 def page_authentification(request):
     if request.method == 'POST':
@@ -16,9 +18,9 @@ def page_authentification(request):
 
         if user is not None:
             login(request, user)
-            return redirect('Home')  # Remplacez 'dashboard' par le nom de votre vue de tableau de bord
+            return redirect('Home')  
         else:
-            # Gestion de l'erreur d'authentification (peut être personnalisée)
+            
             error_message = "Identifiant ou mot de passe incorrect."
 
     return render(request, 'page_authentification.html', locals())
@@ -49,10 +51,6 @@ def prefillPatient(request, pk):
     context = {'form': form}
     return render(request, 'ajouter_patient.html', context) 
 
-
-
-
-
 def ajouter_patient(request):
     patient_to_update = request.session.pop('patient_to_update', None)
 
@@ -77,6 +75,25 @@ def supprimer_patient(request, pk):
     patient = Patient.objects.get(Num_P=pk)
     patient.delete()
     return redirect('liste_patients')
+
+
+def Dossier_medical(request, patient_id):
+    
+    patient = get_object_or_404(Patient, Num_P=patient_id)
+
+   
+    dossier, created = Dossier.objects.get_or_create(Num_Patient=patient)
+
+    if request.method == 'POST':
+        
+        form = DossierForm(request.POST, instance=dossier)
+        if form.is_valid():
+            form.save()
+            return redirect('dossier_medical', patient_id=patient.id)
+    else:
+        form = DossierForm(instance=dossier)
+
+    return render(request, 'dossier_medical.html', {'form': form, 'dossier_medical': dossier})
 
 def liste_medecins(request): 
     query = request.GET.get('q')

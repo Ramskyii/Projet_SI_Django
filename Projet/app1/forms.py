@@ -2,7 +2,7 @@ from django import forms
 from .models import Patient
 from .models import Medecin
 from .models import RendezVous
-
+from .models import Dossier
 
 class PatientForm(forms.ModelForm) :
     class Meta:
@@ -13,6 +13,11 @@ class PatientForm(forms.ModelForm) :
 class MedecinForm(forms.ModelForm) :
     class Meta : 
         model = Medecin
+        fields = '__all__'
+
+class DossierForm(forms.ModelForm):
+    class Meta:
+        model = Dossier
         fields = '__all__'
 
 

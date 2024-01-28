@@ -16,6 +16,9 @@ class Patient(models.Model) :
     Genre = models.CharField(max_length = 1,choices = choix_genre)
     def delete(self):
         return super().delete()  
+    
+    def rendezvous_set(self):
+        return RendezVous.objects.filter(Num_p=self)
 
 class Medecin(models.Model) : 
     Num_M = models.AutoField(primary_key=True)

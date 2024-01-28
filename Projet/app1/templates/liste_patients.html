@@ -36,6 +36,12 @@
                 <td>
                     <a href="{% url 'supprimer_patient' pk=patient.Num_P %}"><button>Supprimer</button></a>
                 </td>
+                <td>
+                    <a href="{% url 'Dossier_medical' patient_id=patient.Num_P %}">Voir Dossier</a>
+
+
+
+                </td>
                 
             </tr>
         {% endfor %}
