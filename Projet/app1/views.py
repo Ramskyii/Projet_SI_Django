@@ -9,8 +9,12 @@ from .models import Salle
 from django.contrib.auth import authenticate, login
 from .models import Dossier
 from .forms import DossierForm
+<<<<<<< HEAD
 from .models import Diagnostic
 from .forms import DiagnosticForm
+=======
+from django.contrib import messages
+>>>>>>> 6bc49b1 (Contraint ps tout marche)
 
 def page_authentification(request):
     if request.method == 'POST':
@@ -59,13 +63,26 @@ def ajouter_patient(request):
     if request.method == 'POST':
         form = PatientForm(request.POST)
         if form.is_valid():
-            if patient_to_update:
-                patient = Patient.objects.get(Num_P= patient_to_update)
-                form = PatientForm(request.POST, instance=patient)
-            form.save()
-            print("Patient ajouté ou mis à jour avec succès!")
-            return redirect('liste_patients')  
-        
+            nom_p = form.cleaned_data['Nom_P']
+            prenom_p = form.cleaned_data['Prenom_P']
+            telephone_p = form.cleaned_data['Telephone_P']
+
+            if not nom_p.isalpha():
+                form.add_error('Nom_P', 'Le Nom doit contenir uniquement des lettres.')
+
+            if not prenom_p.isalpha():
+                form.add_error('Prenom_P', 'Le Prénom doit contenir uniquement des lettres.')
+
+            if not telephone_p.isdigit():
+                form.add_error('Telephone_P', 'Le Téléphone doit contenir uniquement des chiffres.')
+
+            if not form.errors:
+                if patient_to_update:
+                    patient = Patient.objects.get(Num_P= patient_to_update)
+                    form = PatientForm(request.POST, instance=patient)
+                form.save()
+                messages.success(request, "Patient ajouté ou mis à jour avec succès!")
+                return redirect('liste_patients')  
     else:
         form = PatientForm()
 
@@ -131,12 +148,23 @@ def ajouter_medecin(request):
     if request.method == 'POST':
         form = MedecinForm(request.POST)
         if form.is_valid():
-            if form.is_valid():
+            nom_m = form.cleaned_data['Nom_M']
+            prenom_m = form.cleaned_data['Prenom_M']
+            telephone_m = form.cleaned_data['Telephone_M']
+
+            if not nom_m.isalpha():
+                form.add_error('Nom_M','Le Nom doit contenir uniquement des lettres.')
+            if not prenom_m.isalpha():
+                form.add_error('Prenom_M', 'Le Prénom doit contenir uniquement des lettres.')
+
+            if not telephone_m.isdigit():
+                form.add_error('Telephone_M', 'Le Téléphone doit contenir uniquement des chiffres.')
+            if not form.errors:
                 if medecin_to_update:
                     medecin = Medecin.objects.get(Num_M= medecin_to_update)
                     form = MedecinForm(request.POST, instance=medecin)
-            form.save()
-            return redirect('liste_medecins')  
+                form.save()
+                return redirect('liste_medecins')  
     else:
         form = MedecinForm()
 
